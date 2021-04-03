@@ -12,6 +12,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 import static com.dev.oms.utils.ApiUtils.success;
+import static com.dev.oms.utils.ApiUtils.ApiResult;
 
 @RestController
 @RequestMapping("api/products")
@@ -25,7 +26,7 @@ public class ProductRestController {
 
     // FIXME `요건 1` 정의에 맞게 응답 타입 수정이 필요합니다.
     @GetMapping(path = "{id}")
-    public ApiUtils.ApiResult<ProductDto> findById(@PathVariable Long id) {
+    public ApiResult<ProductDto> findById(@PathVariable Long id) {
         ProductDto response =  productService.findById(id)
                 .map(ProductDto::new)
                 .orElseThrow(() -> new NotFoundException("Could not found product for " + id));
@@ -35,7 +36,7 @@ public class ProductRestController {
 
     // FIXME `요건 1` 정의에 맞게 응답 타입 수정이 필요합니다.
     @GetMapping
-    public ApiUtils.ApiResult<List<ProductDto>> findAll() {
+    public ApiResult<List<ProductDto>> findAll() {
         List<ProductDto> responseList = productService.findAll().stream()
                 .map(ProductDto::new)
                 .collect(toList());
