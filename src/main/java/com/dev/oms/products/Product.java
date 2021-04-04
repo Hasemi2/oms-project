@@ -111,6 +111,10 @@ public class Product {
                 .toString();
     }
 
+    public void plusReviewCount() {
+        reviewCount++;
+    }
+
     static public class Builder {
         private Long seq;
         private String name;

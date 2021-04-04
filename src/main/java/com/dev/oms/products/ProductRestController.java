@@ -1,7 +1,6 @@
 package com.dev.oms.products;
 
 import com.dev.oms.errors.NotFoundException;
-import com.dev.oms.utils.ApiUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,10 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
-import static com.dev.oms.utils.ApiUtils.success;
 import static com.dev.oms.utils.ApiUtils.ApiResult;
+import static com.dev.oms.utils.ApiUtils.success;
+import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("api/products")
@@ -24,7 +22,6 @@ public class ProductRestController {
         this.productService = productService;
     }
 
-    // FIXME `요건 1` 정의에 맞게 응답 타입 수정이 필요합니다.
     @GetMapping(path = "{id}")
     public ApiResult<ProductDto> findById(@PathVariable Long id) {
         ProductDto response =  productService.findById(id)
@@ -34,7 +31,6 @@ public class ProductRestController {
         return success(response);
     }
 
-    // FIXME `요건 1` 정의에 맞게 응답 타입 수정이 필요합니다.
     @GetMapping
     public ApiResult<List<ProductDto>> findAll() {
         List<ProductDto> responseList = productService.findAll().stream()

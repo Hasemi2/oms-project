@@ -37,6 +37,15 @@ public class JdbcProductRepository implements ProductRepository {
         );
     }
 
+    @Override
+    public void update(Product product) {
+        jdbcTemplate.update(
+                "UPDATE products SET review_count =? WHERE seq=?",
+                product.getReviewCount(),
+                product.getSeq()
+        );
+    }
+
     static RowMapper<Product> mapper = (rs, rowNum) ->
             new Product.Builder()
                     .seq(rs.getLong("seq"))

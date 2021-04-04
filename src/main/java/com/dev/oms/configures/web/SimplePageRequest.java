@@ -3,8 +3,6 @@ package com.dev.oms.configures.web;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 public class SimplePageRequest implements Pageable {
 
     private final long offset;
@@ -16,8 +14,8 @@ public class SimplePageRequest implements Pageable {
     }
 
     public SimplePageRequest(long offset, int size) {
-        checkArgument(offset >= 0, "offset must be greater or equals to zero");
-        checkArgument(size >= 1, "size must be greater than zero");
+        if (offset < 0) offset = 0;
+        if (size < 0 || size > 5) size = 5;
 
         this.offset = offset;
         this.size = size;
